@@ -211,8 +211,8 @@
 											<p>Este projeto tem como objetivo criar um sistema de previsão de vendas para a rede de farmácias Rossmann. A solução desenvolvida permite prever o faturamento de qualquer loja da rede para as próximas 6 semanas, auxiliando na tomada de decisões estratégicas.</p>
 											<p>Ao longo do desenvolvimento, enfrentei desafios como o tratamento dos dados e a criação de uma API, que até então não fazia parte da minha rotina. Como resultado, construí um modelo de machine learning capaz de realizar as previsões, além de desenvolver um aplicativo no Streamlit que permite que o usuário consulte o faturamento estimado da sua loja e visualize as 10 lojas que mais venderam e as 10 que mais venderão no período.</p>
 											<ul class="actions">
-												<li><a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="button">GitHub</a></li>
-												<li><a href="https://approssmann-prediction.streamlit.app/" class="button">Streamlit</a></li>
+												<li><a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="button" target="_blank">GitHub</a></li>
+												<li><a href="https://approssmann-prediction.streamlit.app/" class="button" target="_blank">Streamlit</a></li>
 											</ul>
 									</article>
 
@@ -257,6 +257,7 @@
 											display: none;
 											position: fixed;
 											z-index: 999;
+											padding: 20px;
 											left: 0;
 											top: 0;
 											width: 100%;
@@ -265,10 +266,13 @@
 											background-color: rgba(0,0,0,0.9);
 											}
 											.modal-content {
-											margin: 5% auto;
+											margin: auto;
 											display: block;
 											width: 80%;
-											max-width: 900px;
+											height: 80%;
+											max-width: 1000px;
+											max-height: 90vh;
+											border: none;
 											}
 											.close {
 											position: absolute;
