@@ -237,19 +237,38 @@
 										<meta name="viewport" content="width=device-width, initial-scale=1.0">
 										<title>Certificados</title>
 										<style>
+											
+
+											/* Grid de miniaturas */
 											.gallery {
 											display: grid;
-											grid-template-columns: repeat(3, 1fr);
-											gap: 50px;
+											grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+											gap: 20px;
+											max-width: 1200px;
+											margin: 0 auto;
 											}
-											.gallery img {
-											width: 70%;
+
+											figure {
+											text-align: center;
+											margin: 0;
 											cursor: pointer;
+											}
+
+											figure img {
+											width: 100%;
+											max-width: 250px;
 											border-radius: 8px;
 											transition: transform 0.3s;
 											}
-											.gallery img:hover {
+
+											figure img:hover {
 											transform: scale(1.05);
+											}
+
+											figcaption {
+											margin-top: 8px;
+											font-size: 0.95rem;
+											color: #444;
 											}
 
 											/* Modal */
@@ -257,14 +276,15 @@
 											display: none;
 											position: fixed;
 											z-index: 999;
-											padding: 20px;
 											left: 0;
 											top: 0;
 											width: 100%;
 											height: 100%;
 											overflow: auto;
 											background-color: rgba(0,0,0,0.9);
+											padding: 20px;
 											}
+
 											.modal-content {
 											margin: auto;
 											display: block;
@@ -274,6 +294,7 @@
 											max-height: 90vh;
 											border: none;
 											}
+
 											.close {
 											position: absolute;
 											top: 20px;
@@ -283,71 +304,73 @@
 											font-weight: bold;
 											cursor: pointer;
 											}
-											.close:hover {
+
+											.close:hover,
+											.close:focus {
 											color: #bbb;
+											text-decoration: none;
+											cursor: pointer;
 											}
-											@media screen and (max-width: 600px) {
-											.modal-content {
-												width: 95%;
-											}
-										}
-										
 										</style>
 									</head>
 									<body>
 
-									<h2>Certificados</h2>
-									<p>Abaixo estão alguns dos certificados que obtive durante meus estudos. Clique nas imagens para visualizar os certificados completos.</p>
+										<h2>Certificados</h2>
+										<p>Abaixo estão alguns dos certificados que obtive durante meus estudos. Clique nas imagens para visualizar os certificados completos.</p>
 
-									<div class="gallery">
-										<!-- Certificado 1 -->
-										<figure> 
-											<img src="certificados/thumbs/certificado_ml_coursera.png" alt="Certificado Machine Learning" onclick="openModal('certificados/certificado_ml_coursera.pdf')">
-											<figcaption>Machine Learning Specialization - Coursera</figcaption>
-										</figure>
-										<!-- Certificado 2 -->
-										<figure>
-											<img src="certificados/thumbs/certificado_python_usp.png" alt="Certificado Python USP" onclick="openModal('certificados/certificado_python_usp.pdf')">
-											<figcaption>Introdução à Ciência da Computação com Python - USP</figcaption>
-										</figure>
-										<!-- Certificado 3 -->
-										<figure>
-											<img src="certificados/thumbs/certificado_feature_engineering.png" alt="Certificado Feature Engineering" onclick="openModal('certificados/certificado_feature_engineering.png')">
-											<figcaption>Feature Engineering - Kaggle</figcaption>
-										</figure>										
-										<!-- Certificado 3 -->
-										<figure> 
-											<img src="certificados/thumbs/certificado_green_belt.png" alt="Certificado Green Belt" onclick="openModal('certificados/certificado_green_belt.pdf')">
-											<figcaption>Green Belt - RL & Associados</figcaption>
-										</figure>
-										<!-- Certificado 4 -->
-										<figure>
-											<img src="certificados/thumbs/certificado_black_belt.png" alt="Certificado Black Belt" onclick="openModal('certificados/certificado_black_belt.pdf')">
-											<figcaption>Black Belt - RL & Associados</figcaption>
-										</figure>
-									</div>
+										<div class="gallery">
+											<!-- Certificado 1 -->
+											<figure>
+												<img src="certificados/thumbs/certificado_ml_coursera.png" alt="Certificado Machine Learning" onclick="openModal('certificados/certificado_ml_coursera.pdf')">
+												<figcaption>Machine Learning Specialization - Coursera</figcaption>
+											</figure>
 
-									<!-- Modal -->
-									<div id="myModal" class="modal">
-										<span class="close" onclick="closeModal()">&times;</span>
-										<iframe id="modalContent" class="modal-content" frameborder="0"></iframe>
-									</div>
+											<!-- Certificado 2 -->
+											<figure>
+												<img src="certificados/thumbs/certificado_python_usp.png" alt="Certificado Python USP" onclick="openModal('certificados/certificado_python_usp.pdf')">
+												<figcaption>Introdução à Ciência da Computação com Python - USP</figcaption>
+											</figure>
 
-									<script>
-										function openModal(file) {
-											document.getElementById("myModal").style.display = "block";
-											document.getElementById("modalContent").src = file;
-										}
-										
-										function closeModal() {
-											document.getElementById("myModal").style.display = "none";
-											document.getElementById("modalContent").src = "";
-										}
-									</script>
+											<!-- Certificado 3 -->
+											<figure>
+												<img src="certificados/thumbs/certificado_feature_engineering.png" alt="Certificado Feature Engineering" onclick="openModal('certificados/certificado_feature_engineering.png')">
+												<figcaption>Feature Engineering - Kaggle</figcaption>
+											</figure>
+
+											<!-- Certificado 4 -->
+											<figure>
+												<img src="certificados/thumbs/certificado_green_belt.png" alt="Certificado Green Belt" onclick="openModal('certificados/certificado_green_belt.pdf')">
+												<figcaption>Green Belt - RL & Associados</figcaption>
+											</figure>
+
+											<!-- Certificado 5 -->
+											<figure>
+												<img src="certificados/thumbs/certificado_black_belt.png" alt="Certificado Black Belt" onclick="openModal('certificados/certificado_black_belt.pdf')">
+												<figcaption>Black Belt - RL & Associados</figcaption>
+											</figure>
+										</div>
+
+										<!-- Modal -->
+										<div id="myModal" class="modal">
+											<span class="close" onclick="closeModal()">&times;</span>
+											<iframe class="modal-content" id="modalFrame"></iframe>
+										</div>
+
+										<script>
+											function openModal(certPath) {
+												document.getElementById("myModal").style.display = "block";
+												document.getElementById("modalFrame").src = certPath;
+											}
+
+											function closeModal() {
+												document.getElementById("myModal").style.display = "none";
+												document.getElementById("modalFrame").src = "";
+											}
+										</script>
 
 									</body>
 									</html>
-																	
+																		
 								</section>	
 
 								<!-- Contato -->
