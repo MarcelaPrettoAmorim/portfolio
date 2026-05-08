@@ -6,10 +6,227 @@
 -->
 <html>
 	<head>
-		<title>Portfólio | Ciência de Dados</title>
+		<title>Marcela Amorim | Cientista de Dados</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="Portfólio de Marcela Amorim — Engenheira de Produção em transição para Cientista de Dados Jr. Projetos de Machine Learning end-to-end com foco em gerar valor a partir dos dados." />
+		<meta name="author" content="Marcela Amorim" />
+
+		<!-- Open Graph (LinkedIn, Facebook, WhatsApp) -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Marcela Amorim | Cientista de Dados" />
+		<meta property="og:description" content="Portfólio de Ciência de Dados com projetos de Machine Learning end-to-end aplicados a problemas reais de negócio." />
+		<meta property="og:url" content="https://marcelaprettoamorim.github.io/portfolio/" />
+		<meta property="og:image" content="https://marcelaprettoamorim.github.io/portfolio/images/foto_perfil_atual.jpg" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Marcela Amorim | Cientista de Dados" />
+		<meta name="twitter:description" content="Portfólio de Ciência de Dados com projetos de Machine Learning end-to-end aplicados a problemas reais de negócio." />
+		<meta name="twitter:image" content="https://marcelaprettoamorim.github.io/portfolio/images/foto_perfil_atual.jpg" />
+
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- Estilos da galeria de certificados (movidos do HTML aninhado original) -->
+		<style>
+			/* Grid de miniaturas */
+			.gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 20px;
+				max-width: 1200px;
+				margin: 0 auto;
+			}
+
+			figure {
+				text-align: center;
+				margin: 0;
+				cursor: pointer;
+			}
+
+			figure img {
+				width: 100%;
+				max-width: 250px;
+				border-radius: 8px;
+				transition: transform 0.3s;
+			}
+
+			figure img:hover {
+				transform: scale(1.05);
+			}
+
+			figcaption {
+				margin-top: 8px;
+				font-size: 0.95rem;
+				color: #444;
+			}
+
+			/* Modal */
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 999;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgba(0, 0, 0, 0.9);
+				padding: 20px;
+			}
+
+			.modal-content {
+				margin: auto;
+				display: block;
+				width: 95%;
+				height: 90vh;
+				max-width: 1400px;
+				max-height: 95vh;
+				border: none;
+			}
+
+			/* Quando o conteúdo do modal é uma imagem, usa contain para não cortar/distorcer */
+			.modal-image {
+				width: auto;
+				height: auto;
+				max-width: 95%;
+				max-height: 90vh;
+				object-fit: contain;
+				margin: 2vh auto;
+			}
+
+			.close {
+				position: absolute;
+				top: 20px;
+				right: 35px;
+				color: #fff;
+				font-size: 40px;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			.close:hover,
+			.close:focus {
+				color: #bbb;
+				text-decoration: none;
+				cursor: pointer;
+			}
+
+			/* Override: foto de perfil no banner em formato retangular horizontal.
+			   Largura 320px x altura 240px. object-position: center 30% mantém o rosto
+			   visível (foto original tem o rosto centralizado, ancoramos um pouco acima
+			   para preservar a cabeça inteira ao cortar).
+			   Em telas pequenas (mobile), volta ao layout original do template. */
+			#banner .image {
+				width: 320px !important;
+				max-width: 320px !important;
+				flex: 0 0 320px !important;
+			}
+
+			#banner .image img {
+				max-width: 320px !important;
+				height: 240px !important;
+				object-fit: cover !important;
+				object-position: center 30% !important;
+			}
+
+			/* Em telas pequenas (mobile real, não desktop com janela estreita),
+			   a foto volta a ocupar largura total acima do texto. */
+			@media screen and (max-width: 736px) {
+				#banner .image,
+				#banner .image img {
+					width: 100% !important;
+					max-width: 100% !important;
+					height: auto !important;
+					flex: 0 0 auto !important;
+				}
+			}
+
+			/* === Galeria de Escrita técnica === */
+			/* Layout horizontal (imagem à esquerda, texto à direita), grid 2x3.
+			   Quando há só 1 card, ele ocupa a largura total para evitar
+			   o efeito visual de "galeria pela metade". */
+			.writing-gallery {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2.5em;
+				margin: 0 0 2em 0;
+			}
+
+			.writing-card {
+				display: flex;
+				flex-direction: row;
+				gap: 1.5em;
+				align-items: flex-start;
+				padding: 1.5em;
+				border-radius: 0.5em;
+				background-color: rgba(162, 102, 223, 0.05);
+				border: solid 1px rgba(162, 102, 223, 0.2);
+				transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+			}
+
+			.writing-card:hover {
+				background-color: rgba(162, 102, 223, 0.1);
+				border-color: rgba(162, 102, 223, 0.4);
+			}
+
+			.writing-card .writing-image {
+				flex: 0 0 200px;
+				max-width: 200px;
+			}
+
+			.writing-card .writing-image img {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				border-radius: 0.375em;
+				display: block;
+			}
+
+			.writing-card .writing-content {
+				flex: 1 1 auto;
+				min-width: 0;
+			}
+
+			.writing-card .writing-content h3 {
+				margin: 0 0 0.5em 0;
+				font-size: 1.1em;
+				line-height: 1.4;
+			}
+
+			.writing-card .writing-content p {
+				margin: 0 0 1em 0;
+				font-size: 0.95em;
+			}
+
+			/* Quando existe só um card na galeria, ele ocupa a linha inteira (full width).
+			   Assim que um segundo card for adicionado, esta regra deixa de aplicar
+			   automaticamente e o layout 2 colunas volta. */
+			.writing-card:only-child {
+				grid-column: 1 / -1;
+			}
+
+			/* Em telas pequenas, cada card ocupa uma linha e o layout interno
+			   vira vertical (imagem em cima, texto embaixo). */
+			@media screen and (max-width: 736px) {
+				.writing-gallery {
+					grid-template-columns: 1fr;
+					gap: 1.5em;
+				}
+
+				.writing-card {
+					flex-direction: column;
+					gap: 1em;
+				}
+
+				.writing-card .writing-image,
+				.writing-card .writing-image img {
+					flex: 1 1 auto;
+					max-width: 100%;
+					height: auto;
+				}
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -25,8 +242,9 @@
 									<a href="index.html" class="logo"><strong>Portfólio</strong> | Marcela Amorim | Ciência de Dados</a>
 									<ul class="icons">
 										<li><a href="https://www.linkedin.com/in/marcela-de-pretto-amorim/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-										<li><a href="https://github.com/MarcelaPrettoAmorim" class="icon brands fa-github"><span class="label">Discord</span></a></li>
-										<li><a href="mailto:marcelampretto@gmail.com" class="icon solid fa-envelope"><span class="label"><E-mail></E-mail></span></a></li>
+										<li><a href="https://github.com/MarcelaPrettoAmorim" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="https://medium.com/@marcelampretto" class="icon brands fa-medium"><span class="label">Medium</span></a></li>
+										<li><a href="mailto:marcelampretto@gmail.com" class="icon solid fa-envelope"><span class="label">E-mail</span></a></li>
 									</ul>
 								</header>
 
@@ -35,24 +253,94 @@
 									<div class="content">
 										<header>
 											<h2>
-  												Seja bem-vindo (a) ao meu portfólio de projetos de <span style="background-color: rgba(162, 102, 223, 0.329);">Ciência de Dados</span>.
+												Há 5 anos eu trabalho com dados — antes pra programar produção numa fábrica, agora pra treinar modelos de Machine Learning.
 											</h2>
-
-											
-											</header>
-											<p>Esta página reúne um pouco da minha trajetória, habilidades técnicas e projetos desenvolvidos na área de Ciência de Dados.
-
-											<p>Após alguns anos atuando com Engenharia de Produção, decidi direcionar minha carreira para o mundo dos dados e venho me dedicando ao estudo e à aplicação prática de Machine Learning e análise de dados.<br /><br />
-
-  											Os projetos reunidos aqui foram construídos utilizando dados públicos, com o intuito de resolver problemas de negócio reais, permitindo que eu aplicasse e aprofundasse meus conhecimentos técnicos, além de desenvolver meu pensamento crítico e minha capacidade de gerar valor a partir dos dados.<br /><br />
-
-  											Estou sempre em busca de novos desafios e oportunidades para colocar em prática o que venho aprendendo. Ao final da página, você encontra os links para meus perfis profissionais — fique à vontade para entrar em contato!<br /><br />
-											Obrigada pela visita!</p>
-										
+										</header>
+										<p>Sou Engenheira de Produção em transição para Cientista de Dados Jr. Na indústria alimentícia, gerei mais de <span style="background-color: rgba(162, 102, 223, 0.329);">R$ 1 milhão/ano em economia</span> tomando decisões orientadas por dados. Agora aplico Machine Learning end-to-end em projetos próprios — do tratamento dos dados até o deploy em produção.</p>
 									</div>
 									<span class="image">
 										<img src="images/foto_perfil_atual.jpg" alt="" />
 									</span>
+								</section>
+
+<!-- Projetos -->
+								<section>
+									<header class="main">
+										<h2>Projetos de Ciência de Dados</h2>
+									</header>
+									<div class="posts">
+										<article>
+											<a href="https://github.com/MarcelaPrettoAmorim/Projeto-Curry-Company" class="image">
+												<img src="images/projeto1.png" alt="Imagem do projeto Dashboard para Marketplace de Entregas" />
+											</a>
+											<h3>Dashboard operacional para marketplace de entregas</h3>
+											<p>Painel interativo construído sobre dados de uma operação fictícia de delivery na Índia, com foco em monitoramento de KPIs operacionais (entregadores, restaurantes e pedidos). O projeto cobre o pipeline completo, do tratamento dos dados ao deploy em produção via Streamlit Cloud.</p>
+											<p><strong>Tecnologias:</strong> Python, Pandas, Plotly, Streamlit, Streamlit Cloud e GitHub.</p>
+											<ul class="actions">
+												<li>
+													<a href="https://github.com/MarcelaPrettoAmorim/Projeto-Curry-Company" class="button" target="_blank">
+														GitHub
+													</a>
+												</li>
+												<li>
+													<a href="https://projeto-curry-company-marcela.streamlit.app/" class="button" target="_blank">
+														Streamlit
+													</a>
+												</li>
+											</ul>
+										</article>
+										<article>
+											<a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="image">
+												<img src="images/rossmann.png" alt="Imagem do logo do projeto Rossmann" />
+											</a>
+											<h3>Previsão de vendas para rede de farmácias Rossmann</h3>
+											<p>Sistema de previsão de faturamento das próximas 6 semanas para qualquer loja da rede, voltado a apoiar decisões de planejamento estratégico. Após comparar Linear Regression, Lasso, Random Forest e XGBoost via cross-validation, escolhi XGBoost pelo equilíbrio entre desempenho e custo computacional. Random Search para tuning levou a uma melhoria expressiva: <span style="background-color: rgba(162, 102, 223, 0.329);">acurácia de 74,97% para 86,28% (MAPE 13,72%)</span>, com erro médio caindo de R$ 1.685 para R$ 955 por previsão. O modelo foi exposto via API Flask e consumido por um app Streamlit que permite consultar a previsão por loja.</p>
+											<p><strong>Tecnologias:</strong> Python, Pandas, Scikit-Learn, XGBoost, Random Search, Flask, Streamlit, Streamlit Cloud e GitHub.</p>
+											<ul class="actions">
+												<li><a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="button" target="_blank">GitHub</a></li>
+												<li><a href="https://approssmann-prediction.streamlit.app/" class="button" target="_blank">Streamlit</a></li>
+											</ul>
+										</article>
+
+										<article>
+											<a href="https://github.com/MarcelaPrettoAmorim/board_game_analysis" class="image">
+												<img src="images/board_games.jpg" alt="Imagem ilustrativa do projeto de loja de jogos de tabuleiro" />
+											</a>
+											<h3>Nem todo problema precisa de Machine Learning: análise para loja de jogos</h3>
+											<p>Projeto pessoal motivado por um problema real: ajudar um amigo a compor o estoque inicial de uma loja de jogos de tabuleiro. Construí uma proxy de demanda (<code>demanda_score</code>) a partir de features do dataset, fiz análise exploratória pra entender o que influencia a procura, e gerei uma recomendação de <span style="background-color: rgba(162, 102, 223, 0.329);">20 jogos prioritários</span> para o estoque inicial. Avaliei a viabilidade de Machine Learning e concluí que o problema não exigia ML — uma análise estatística direta entregava mais valor com menos complexidade. Artigo completo no Medium.</p>
+											<p><strong>Tecnologias:</strong> Python, NumPy, Pandas e Scikit-Learn.</p>
+											<ul class="actions">
+												<li><a href="https://github.com/MarcelaPrettoAmorim/board_game_analysis" class="button" target="_blank">GitHub</a></li>
+												<li><a href="https://medium.com/@marcelampretto/nem-todo-problema-precisa-de-machine-learning-33b3b03d3abf" class="button" target="_blank">Medium</a></li>
+											</ul>
+										</article>
+
+									</div>
+								</section>
+
+								<!-- Escrita técnica -->
+								<section>
+									<header class="main">
+										<h2>Escrita técnica</h2>
+									</header>
+									<p>Documento meu aprendizado em Ciência de Dados em formato escrito. No <strong>Medium</strong>, publico artigos aprofundando os projetos do portfólio, com análise de decisões, escolhas técnicas e aprendizados. No <strong>LinkedIn</strong>, compartilho conceitos pontuais e reflexões de estudo de forma mais frequente.</p>
+
+									<div class="writing-gallery">
+										<article class="writing-card">
+											<a href="https://medium.com/@marcelampretto/nem-todo-problema-precisa-de-machine-learning-33b3b03d3abf" class="writing-image" target="_blank">
+												<img src="images/board_games.jpg" alt="Imagem ilustrativa do artigo Nem todo problema precisa de Machine Learning" />
+											</a>
+											<div class="writing-content">
+												<h3>Nem todo problema precisa de Machine Learning</h3>
+												<p>Sobre o exercício de avaliar a aplicação de Machine Learning antes de assumir que ele é a resposta certa para o problema.</p>
+												<ul class="actions">
+													<li><a href="https://medium.com/@marcelampretto/nem-todo-problema-precisa-de-machine-learning-33b3b03d3abf" class="button" target="_blank">Ler no Medium</a></li>
+												</ul>
+											</div>
+										</article>
+									</div>
+
+									<p>Ver perfil completo no <a href="https://medium.com/@marcelampretto" target="_blank">Medium</a> ou acompanhar publicações curtas no <a href="https://www.linkedin.com/in/marcela-de-pretto-amorim/" target="_blank">LinkedIn</a>.</p>
 								</section>
 
 								<!-- Sobre mim -->
@@ -61,22 +349,37 @@
 										<h2>Sobre mim</h2>
 									</header>
 
-									<!-- Content -->
-										<h2 id="content">Meu nome é <strong><span style="background-color: rgba(162, 102, 223, 0.329);">Marcela Amorim</span></strong></h2>
-										<p>Sou formada em Engenharia de Produção e, por mais de cinco anos, atuei como Programadora de Produção na indústria alimentícia. Durante esse período, fui uma das responsáveis pela estruturação do processo produtivo de uma nova unidade fabril, contribuindo para ganhos expressivos de eficiência e alinhamento com os padrões corporativos, além de atuar também no planejamento de demanda e aquisição de insumos para a produção.</p>
-										</p>
-										<p>Minha atuação foi fortemente orientada por dados: implementei melhorias operacionais, reduzi erros em processos-chave (o que gerou uma economia superior a R$ 1 milhão/ano), automatizei tarefas para ganho de produtividade e desenvolvi relatórios analíticos para suporte à tomada de decisão. Também tive papel ativo na integração e suporte a diversas áreas(Operações, Logística, Suprimentos, Controladoria e Qualidade).</p>
-										<p>
-										Conheci a Ciência de Dados em 2023 e me identifiquei muito com o papel do cientista de dados na resolução de problemas. Em 2024, decidi mudar de carreira de forma planejada e focada. Desde então, venho me dedicando aos estudos em análise de dados, Machine Learning, estatística e Cloud."
-										</p>
-										<p>
-										Tenho desenvolvido projetos próprios com dados públicos, aplicando técnicas de modelagem, análise exploratória, storytelling, machine learning e elaboração de soluções para problemas de negócio. 
-										</p>
-										<p><em> <span style="background-color: rgba(162, 102, 223, 0.329);">Atualmente, estou em busca de novas oportunidades onde eu possa unir minhas experiências práticas anteriores com as ferramentas da Ciência de Dados para gerar valor por meio de decisões mais inteligentes e orientadas por dados.</span></em></p>
-										
-									</section>
+									<p>Engenheira de Produção formada pela UNIVEM, com <span style="background-color: rgba(162, 102, 223, 0.329);">cinco anos e meio de carreira na indústria</span> alimentícia. Atuei na estruturação do processo produtivo de uma nova fábrica e no planejamento de demanda e suprimentos, sempre olhando para os dados antes de decidir.</p>
 
-							<!-- Section -->
+									<p>Em 2023, percebi que aquilo que eu já fazia há anos tinha um nome formal: Ciência de Dados. O que descobri foi um campo inteiro dedicado a fazer isso com rigor, usando modelagem estatística e Machine Learning como ferramentas centrais. A partir daí, a transição virou um plano consciente: estudar a fundo, construir projetos próprios e migrar de carreira.</p>
+
+									<p>Curso o <span style="background-color: rgba(162, 102, 223, 0.329);">Bacharelado em Ciência de Dados pela Univesp</span>, com previsão de conclusão em 2028, complementando com certificações específicas como Machine Learning Specialization (Coursera) e DP-100 Microsoft Azure Data Scientist. Mantenho projetos próprios end-to-end usando dados públicos, escrevo no Medium sobre o que aprendo e busco aplicar Ciência de Dados onde ela gera mais valor, inclusive sabendo reconhecer quando ela não é a resposta certa para o problema.</p>
+
+								</section>
+
+															<!-- Experiencias -->
+								<section>
+									<header class="main">
+										<h2>Experiências</h2>
+									</header>
+
+										<article>
+											<div class="content">
+												<h2 style="color: #60417e;">Programadora de Produção Jr.</h2>
+												<p><strong>Dori Alimentos</strong> — out/2018 a mar/2024 (5 anos e 6 meses, contemplando cargos anteriores na empresa)</p>
+												<ul>
+													<li>Atuei na estruturação do processo produtivo de uma nova fábrica, alinhado a <span style="background-color: #e0ddfa;">padrões corporativos</span> e com foco em <span style="background-color: #e0ddfa;">eficiência operacional</span></li>
+													<li>Reduzi erros no balanço final de 27% para 3,5%, gerando economia superior a <span style="background-color: rgba(162, 102, 223, 0.329);">R$ 1 milhão/ano</span></li>
+													<li>Desenvolvi relatórios analíticos para análise de consumo e suporte à decisão, apresentando resultados a <span style="background-color: #e0ddfa;">stakeholders</span> de diferentes níveis hierárquicos</li>
+													<li>Implementei automações em <span style="background-color: #e0ddfa;">Excel</span> que reduziram em <span style="background-color: #e0ddfa;">60% o tempo de análises operacionais críticas</span>, eliminando erros manuais</li>
+													<li>Atuei no <span style="background-color: #e0ddfa;">planejamento de demanda</span> e previsão de matérias-primas, integrando dados de Operações, Logística, Suprimentos e Qualidade</li>
+												</ul>
+											</div>
+										</article>
+
+								</section>
+
+							<!-- Habilidades -->
 								<section>
 									<header class="main">
 										<h2 style="color: #1d1132;"> Habilidades </h2>
@@ -120,15 +423,15 @@
 										<article>
 											<span class="icon solid fa-cloud"></span>
 											<div class="content">
-												<h3 style="color: #60417e;">Engenharia de Software</h3>
+												<h3 style="color: #60417e;">Deploy &amp; MLOps básico</h3>
 												<ul>
-													<li>Criação de APIs com <span style="background-color: #e0ddfa;">Flask</span> e <span style="background-color: #e0ddfa;">FastAPI</span> para disponibilizar modelos em produção</li>
-													<li>Deploy de aplicações com <span style="background-color: #e0ddfa;">Streamlit</span></li>
-													<li>Boas práticas de programação</li>
+													<li>Criação de APIs com <span style="background-color: #e0ddfa;">Flask</span> para disponibilizar modelos em produção</li>
+													<li>Deploy de aplicações em <span style="background-color: #e0ddfa;">Streamlit Cloud</span></li>
+													<li>Versionamento e organização de projetos com <span style="background-color: #e0ddfa;">Git</span> e <span style="background-color: #e0ddfa;">GitHub</span></li>
 												</ul>
 											</div>
 										</article>
-										
+
 										<article>
 											<span class="icon solid fa-laptop-code"></span>
 											<div class="content">
@@ -138,7 +441,6 @@
 													<li><span style="background-color: #e0ddfa;">Feature engineering</span> e <span style="background-color: #e0ddfa;">feature selection</span> para otimização de desempenho</li>
 													<li>Validação de modelos com <span style="background-color: #e0ddfa;">cross-validation</span> e métricas apropriadas</li>
 													<li>Otimização de <span style="background-color: #e0ddfa;">hiperparâmetros</span></li>
-													<li>Conhecimento em redes neurais com <span style="background-color: #e0ddfa;">TensorFlow</span> e <span style="background-color: #e0ddfa;">Keras</span></li>
 													<li>Estatística descritiva, inferencial e probabilidade aplicadas à análise e modelagem</li>
 												</ul>
 											</div>
@@ -147,230 +449,62 @@
 									</div>
 								</section>
 
-								<!-- Experiencias -->
-								<section>
-									<header class="main">
-										<h2>Experiências</h2>
-									</header>
-
-										<article>  
-											<div class="content"> <h2 style="color: #60417e;"> Programador de Produção Jr.</h2>
-												<p><strong>Dori Alimentos</strong> — 5 anos e 6 meses</p> 
-												<ul> 
-													<li>Atuei na estruturação do processo produtivo de uma nova fábrica, alinhado a <span style="background-color: #e0ddfa;">padrões corporativos</span> e com foco em <span style="background-color: #e0ddfa;">eficiência operacional</span></li> 
-													<li>Reduzi erros no balanço final de 27% para 3,5%, gerando economia superior a <span style="background-color: #e0ddfa;">R$ 1 milhão/ano</span></li>
-													<li>Implementei automações em <span style="background-color: #e0ddfa;">Excel</span> que diminuíram o tempo de execução e minimizaram erros manuais</li> 
-													<li>Melhorei o modelo de <span style="background-color: #e0ddfa;">controle de estoque</span>, aumentando a precisão para tomada de decisão</li>
-													<li>Desenvolvi relatórios mensais para análise de consumo e apresentava resultados a <span style="background-color: #e0ddfa;">stakeholders</span> de diversos níveis</li>
-													<li>Participei do <span style="background-color: #e0ddfa;">planejamento estratégico</span> com foco em previsões de matérias-primas e demandas</li> 
-													<li>Capacitei equipes de produção e logística nos procedimentos corretos com <span style="background-color: #e0ddfa;">SAP</span> e conferência de dados</li> 
-												</ul> 
-											</div>
-									 	</article>
-
-									<!-- Content -->
-										<h2 id="content" style="color: #60417e;">Projetos completos (end-to-end) de Ciência de Dados</h2>
-										<p>Minha trajetória profissional começou na indústria, onde trabalhei diretamente com processos, dados e melhoria contínua. Ao longo dos anos, desenvolvi uma visão analítica muito forte e uma facilidade em transformar dados em soluções. Nos últimos meses, venho desenvolvendo projetos de <strong>Ciência de Dados</strong> de forma autônoma, aplicando técnicas, ferramentas e boas práticas usadas no mercado. Considero esses projetos uma extensão prática da minha experiência profissional, pois envolvem resolução de problemas reais, construção de pipelines de dados, desenvolvimento de modelos de machine learning e deploy de soluções.</p>
-																				
-								</section>
-
-							<!-- Section -->
-								<section>
-									<header class="main">
-										<h2>Projetos de Ciência de Dados</h2>
-									</header>
-									<div class="posts">
-										<article>
-											<a href="https://github.com/MarcelaPrettoAmorim/Projeto-Curry-Company" class="image">
-												<img src="images/projeto1.png" alt="Imagem do projeto Dashboard para Marketplace de Entregas" />
-											</a>
-											<h3>Desenvolvimento de dashboard operacional para Marketplace de Entregas</h3>
-											<p><strong>Tecnologias:</strong> Python, Pandas, Plotly, Streamlit, Streamlit Cloud e GitHub</p>
-											<p>
-												Desenvolvi um painel interativo para um marketplace de entregas na Índia, utilizando Python para tratamento e análise de dados, e Streamlit para criação da interface web. A solução apresenta as principais métricas operacionais da empresa, auxiliando na tomada de decisões estratégicas. O projeto contempla todo o pipeline: desde a manipulação dos dados, construção dos gráficos e indicadores, até a disponibilização do dashboard na web, acessível de qualquer dispositivo.
-											</p>
-											<ul class="actions">
-												<li>
-													<a href="https://github.com/MarcelaPrettoAmorim/Projeto-Curry-Company" class="button" target="_blank">
-														GitHub
-													</a>
-												</li>
-												<li>
-													<a href="https://projeto-curry-company-marcela.streamlit.app/" class="button" target="_blank">
-														Streamlit
-													</a>
-												</li>
-											</ul>
-										</article>
-										<article>
-											<a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="image">
-												<img src="images/rossmann.png" alt="Imagem do logo do projeto Rossamnn" />
-											</a>
-											<h3>Previsão de Vendas para rede de farmácias Rossmann</h3>
-											<p><strong>Tecnologias:</strong> Python, Pandas, Scikit-Learn, RandomSearch, Flask, Streamlit Cloud e GitHub.</p>
-											<p>Este projeto tem como objetivo criar um sistema de previsão de vendas para a rede de farmácias Rossmann. A solução desenvolvida permite prever o faturamento de qualquer loja da rede para as próximas 6 semanas, auxiliando na tomada de decisões estratégicas.</p>
-											<p>Ao longo do desenvolvimento, enfrentei desafios como o tratamento dos dados e a criação de uma API, que até então não fazia parte da minha rotina. Como resultado, construí um modelo de machine learning capaz de realizar as previsões, além de desenvolver um aplicativo no Streamlit que permite que o usuário consulte o faturamento estimado da sua loja e visualize as 10 lojas que mais venderam e as 10 que mais venderão no período.</p>
-											<ul class="actions">
-												<li><a href="https://github.com/MarcelaPrettoAmorim/prediction_rossmann" class="button" target="_blank">GitHub</a></li>
-												<li><a href="https://approssmann-prediction.streamlit.app/" class="button" target="_blank">Streamlit</a></li>
-											</ul>
-									</article>
-
-										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
-											<h3>Dashboard em Power BI</h3>
-											<p> Projeto em desenvolvimento.</p>
-														
-											<ul class="actions">
-												<li><a href="#" class="button">SAIBA MAIS</a></li>
-											</ul>
-										</article>
-										
-									</div>
-								</section>
 								<!-- Certificados -->
 								<section>
-									<!DOCTYPE html>
-									<html lang="pt-br">
-									<head>
-										<meta charset="UTF-8">
-										<meta name="viewport" content="width=device-width, initial-scale=1.0">
-										<title>Certificados</title>
-										<style>
-											
-
-											/* Grid de miniaturas */
-											.gallery {
-											display: grid;
-											grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-											gap: 20px;
-											max-width: 1200px;
-											margin: 0 auto;
-											}
-
-											figure {
-											text-align: center;
-											margin: 0;
-											cursor: pointer;
-											}
-
-											figure img {
-											width: 100%;
-											max-width: 250px;
-											border-radius: 8px;
-											transition: transform 0.3s;
-											}
-
-											figure img:hover {
-											transform: scale(1.05);
-											}
-
-											figcaption {
-											margin-top: 8px;
-											font-size: 0.95rem;
-											color: #444;
-											}
-
-											/* Modal */
-											.modal {
-											display: none;
-											position: fixed;
-											z-index: 999;
-											left: 0;
-											top: 0;
-											width: 100%;
-											height: 100%;
-											overflow: auto;
-											background-color: rgba(0,0,0,0.9);
-											padding: 20px;
-											}
-
-											.modal-content {
-											margin: auto;
-											display: block;
-											width: 80%;
-											height: 80%;
-											max-width: 1000px;
-											max-height: 90vh;
-											border: none;
-											}
-
-											.close {
-											position: absolute;
-											top: 20px;
-											right: 35px;
-											color: #fff;
-											font-size: 40px;
-											font-weight: bold;
-											cursor: pointer;
-											}
-
-											.close:hover,
-											.close:focus {
-											color: #bbb;
-											text-decoration: none;
-											cursor: pointer;
-											}
-										</style>
-									</head>
-									<body>
-
+									<header class="main">
 										<h2>Certificados</h2>
-										<p>Abaixo estão alguns dos certificados que obtive durante meus estudos. Clique nas imagens para visualizar os certificados completos.</p>
+									</header>
+									<p>Abaixo estão alguns dos certificados que obtive durante meus estudos. Clique nas imagens para visualizar os certificados completos.</p>
 
-										<div class="gallery">
-											<!-- Certificado 1 -->
-											<figure>
-												<img src="certificados/thumbs/certificado_ml_coursera.png" alt="Certificado Machine Learning" onclick="openModal('certificados/certificado_ml_coursera.pdf')">
-												<figcaption>Machine Learning Specialization - Coursera</figcaption>
-											</figure>
+									<div class="gallery">
+										<!-- Certificado 1 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_dp100.png" alt="Certificado DP-100 Microsoft Azure Data Scientist" onclick="openModal('certificados/certificado_dp100.pdf')">
+											<figcaption>DP-100 Microsoft Azure Data Scientist - Microsoft</figcaption>
+										</figure>
 
-											<!-- Certificado 2 -->
-											<figure>
-												<img src="certificados/thumbs/certificado_python_usp.png" alt="Certificado Python USP" onclick="openModal('certificados/certificado_python_usp.pdf')">
-												<figcaption>Introdução à Ciência da Computação com Python - USP</figcaption>
-											</figure>
+										<!-- Certificado 2 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_ml_coursera.png" alt="Certificado Machine Learning" onclick="openModal('certificados/certificado_ml_coursera.pdf')">
+											<figcaption>Machine Learning Specialization - Coursera</figcaption>
+										</figure>
 
-											<!-- Certificado 3 -->
-											<figure>
-												<img src="certificados/thumbs/certificado_feature_engineering.png" alt="Certificado Feature Engineering" onclick="openModal('certificados/certificado_feature_engineering.png')">
-												<figcaption>Feature Engineering - Kaggle</figcaption>
-											</figure>
+										<!-- Certificado 3 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_programaria.png" alt="Certificado PrograMaria Sprint Agentes de IA" onclick="openModal('certificados/certificado_programaria.pdf')">
+											<figcaption>Sprint Agentes de IA - PrograMaria</figcaption>
+										</figure>
 
-											<!-- Certificado 4 -->
-											<figure>
-												<img src="certificados/thumbs/certificado_green_belt.png" alt="Certificado Green Belt" onclick="openModal('certificados/certificado_green_belt.pdf')">
-												<figcaption>Green Belt - RL & Associados</figcaption>
-											</figure>
+										<!-- Certificado 4 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_black_belt.png" alt="Certificado Black Belt" onclick="openModal('certificados/certificado_black_belt.pdf')">
+											<figcaption>Black Belt - RL &amp; Associados</figcaption>
+										</figure>
 
-											<!-- Certificado 5 -->
-											<figure>
-												<img src="certificados/thumbs/certificado_black_belt.png" alt="Certificado Black Belt" onclick="openModal('certificados/certificado_black_belt.pdf')">
-												<figcaption>Black Belt - RL & Associados</figcaption>
-											</figure>
-										</div>
+										<!-- Certificado 5 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_feature_engineering.png" alt="Certificado Feature Engineering" onclick="openModal('certificados/certificado_feature_engineering.png')">
+											<figcaption>Feature Engineering - Kaggle</figcaption>
+										</figure>
 
-										<!-- Modal -->
-										<div id="myModal" class="modal">
-											<span class="close" onclick="closeModal()">&times;</span>
-											<iframe class="modal-content" id="modalFrame"></iframe>
-										</div>
+										<!-- Certificado 6 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_python_usp.png" alt="Certificado Python USP" onclick="openModal('certificados/certificado_python_usp.pdf')">
+											<figcaption>Introdução à Ciência da Computação com Python - USP</figcaption>
+										</figure>
 
-										<script>
-											function openModal(certPath) {
-												document.getElementById("myModal").style.display = "block";
-												document.getElementById("modalFrame").src = certPath;
-											}
+										<!-- Certificado 7 -->
+										<figure>
+											<img src="certificados/thumbs/certificado_green_belt.png" alt="Certificado Green Belt" onclick="openModal('certificados/certificado_green_belt.pdf')">
+											<figcaption>Green Belt - RL &amp; Associados</figcaption>
+										</figure>
+									</div>
 
-											function closeModal() {
-												document.getElementById("myModal").style.display = "none";
-												document.getElementById("modalFrame").src = "";
-											}
-										</script>
-
-									</body>
-									</html>
-																		
+									<!-- Modal: container vazio que recebe <iframe> (PDF) ou <img> (imagem) via JS -->
+									<div id="myModal" class="modal">
+										<span class="close" onclick="closeModal()">&times;</span>
+										<div id="modalContent"></div>
+									</div>
 								</section>	
 
 								<!-- Contato -->
@@ -383,6 +517,7 @@
 										<li class="icon solid fa-envelope"><a href="mailto:marcelampretto@gmail.com">marcelampretto@gmail.com</a></li>
 										<li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/marcela-de-pretto-amorim/">LinkedIn</a></li>
 										<li class="icon brands fa-github"><a href="https://github.com/MarcelaPrettoAmorim">GitHub</a></li>
+										<li class="icon brands fa-medium"><a href="https://medium.com/@marcelampretto">Medium</a></li>
 									</ul>
 								</section>
 								
@@ -397,6 +532,45 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<!-- Modal de certificados (movido do HTML aninhado original) -->
+			<script>
+				/**
+				 * Abre o modal com o certificado escolhido. Detecta a extensão do arquivo
+				 * e injeta <iframe> (PDF) ou <img> (imagem) dentro do container do modal,
+				 * para que cada tipo de arquivo tenha a melhor experiência de visualização.
+				 */
+				function openModal(certPath) {
+					var modal = document.getElementById("myModal");
+					var content = document.getElementById("modalContent");
+					var ext = certPath.split('.').pop().toLowerCase();
+
+					// Limpa conteúdo anterior
+					content.innerHTML = "";
+
+					if (ext === "pdf") {
+						// PDF: usa iframe (navegador renderiza nativamente)
+						var iframe = document.createElement("iframe");
+						iframe.src = certPath;
+						iframe.className = "modal-content";
+						content.appendChild(iframe);
+					} else {
+						// Imagem (png, jpg, jpeg, webp...): usa <img> para exibição direta
+						var img = document.createElement("img");
+						img.src = certPath;
+						img.alt = "Certificado";
+						img.className = "modal-content modal-image";
+						content.appendChild(img);
+					}
+
+					modal.style.display = "block";
+				}
+
+				function closeModal() {
+					document.getElementById("myModal").style.display = "none";
+					document.getElementById("modalContent").innerHTML = "";
+				}
+			</script>
 
 	</body>
 </html>
