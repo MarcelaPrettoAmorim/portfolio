@@ -226,6 +226,26 @@
 					height: auto;
 				}
 			}
+
+			/* === Grade de Projetos (grid simples, substitui flexbox+divisórias do template,
+			   que quebrava com quantidade ímpar de projetos) === */
+			.posts {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2.5em;
+				margin: 0 0 2em 0;
+				width: 100%;
+			}
+
+			.posts article {
+				margin: 0;
+				width: auto;
+			}
+
+			.posts article:before,
+			.posts article:after {
+				display: none;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
